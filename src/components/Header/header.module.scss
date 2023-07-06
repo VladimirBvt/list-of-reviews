@@ -1,0 +1,39 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  background: #b9d6ef;
+  padding: 0 30px;
+
+  &Left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &Right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+}
+
+.logo {
+  width: 30px;
+  height: 30px;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #2a2929;
+}
+
+.select {
+  height: 30px;
+  background: #e7e6e6;
+  border-radius: 8px;
+}

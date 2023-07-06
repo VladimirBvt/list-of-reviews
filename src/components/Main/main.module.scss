@@ -1,0 +1,30 @@
+.main {
+  padding: 15px 30px;
+}
+
+.reviewList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pagination {
+  margin-top: 20px;
+
+  .button {
+    width: 30px;
+    height: 20px;
+    background: #eab912;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:active {
+      background: #a4820d;
+    }
+  }
+
+  .currentPage {
+    display: inline-block;
+    padding: 0 10px;
+  }
+}
