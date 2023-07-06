@@ -1,9 +1,21 @@
-import React, {Component} from 'react';
+import React, {ChangeEvent, Component} from 'react';
 import styles from './header.module.scss'
 import logo from '../../assets/images/logo-reviews.png'
 import Watch from '../Watch/Watch';
+import {IAppState, Language} from '../../app/App';
 
-class Header extends Component {
+interface IHeaderProps {
+  setLanguage: (lang: IAppState) => void;
+  language: string;
+}
+
+type Props = Readonly<IHeaderProps>
+
+class Header extends Component<Props> {
+
+  handleLanguageChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    this.props.setLanguage({language: event.target.value})
+  }
 
   render() {
     return (
@@ -16,7 +28,7 @@ class Header extends Component {
         </div>
 
         <div className={styles.headerRight}>
-          <select name="languages" className={styles.select}>
+          <select onChange={this.handleLanguageChange} name="languages" className={styles.select}>
             <option value="ru">ru</option>
             <option value="en">en</option>
           </select>
