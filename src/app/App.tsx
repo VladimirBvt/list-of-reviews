@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
-import './App.scss';
 import Header from '../components/Header/Header';
 import Main from '../components/Main/Main';
 
 interface IAppProps {}
-
-export type Language = 'ru' | 'en'
 
 export interface IAppState {
   language: string
@@ -27,7 +24,7 @@ class App extends Component<Props, State> {
 
   render() {
     return (
-      <div className="App">
+      <div>
         <Header setLanguage={this.setState.bind(this)} language={this.state.language} />
         <Main language={this.state.language} />
       </div>

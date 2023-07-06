@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import styles from './main.module.scss'
 import reviews from '../../data.json'
 import reviewsData from '../../data.json';
+import Review from '../Review/Review';
+import {getTotalPageCount, ROWS_PER_PAGE} from './utils';
 
 interface IMainProps {
   language: string
@@ -14,32 +16,11 @@ interface IMainState {
   disableRight: boolean,
 }
 
-interface IClientReview {
-  name: string;
-  review: string;
-  date: string;
-}
-
 type Props = Readonly<IMainProps>
 type State = Readonly<IMainState>
 type ReviewsData = typeof reviewsData
 
-const ROWS_PER_PAGE = 10
 
-const getTotalPageCount = (rowCount: number) => {
-  return Math.ceil(rowCount / ROWS_PER_PAGE)
-}
-
-const getRowsInPage = (
-  currentPage: number,
-  data: IClientReview[],
-  // totalRows: number
-) => {
-  const maxRow = currentPage * ROWS_PER_PAGE // 2 * 10 = 20
-  const minRow = maxRow - ROWS_PER_PAGE // 20 - 10 = 10
-
-  return data.slice(minRow, maxRow)
-}
 
 
 class Main extends Component<Props, State> {
@@ -59,11 +40,6 @@ class Main extends Component<Props, State> {
     this.setState({...this.state, currentPage: prevPage > 0 ? prevPage : currentPage})
   }
 
-
-  componentDidMount() {
-
-  }
-
   constructor(props: Props) {
     super(props);
 
@@ -80,28 +56,18 @@ class Main extends Component<Props, State> {
     const reviewsRu = Object.entries(this.state.reviews.ru)
     const reviewsEn = Object.entries(this.state.reviews.en)
     const maxRows = language === 'ru' ? reviewsRu.length : reviewsEn.length
-    const maxRow = this.state.currentPage * ROWS_PER_PAGE // 2 * 10 = 20
-    const minRow = maxRow - ROWS_PER_PAGE // 20 - 10 = 10
-
-    console.log(this.state)
+    const maxRow = this.state.currentPage * ROWS_PER_PAGE
+    const minRow = maxRow - ROWS_PER_PAGE
 
     return (
       <div className={styles.main}>
-        <div>
+        <div className={styles.reviewList}>
           {language === 'ru' ?
             reviewsRu.slice(minRow, maxRow).map((review) => (
-              <div key={review[0]}>
-                <div>Имя клиента: {review[1].name}</div>
-                <div>Отзыв: {review[1].review}</div>
-                <div>Дата: {review[1].date}</div>
-              </div>
+              <Review review={review[1]} key={review[0]} />
             )) :
             reviewsEn.slice(minRow, maxRow).map(review => (
-              <div key={review[0]}>
-                <div>Имя клиента: {review[1].name}</div>
-                <div>Отзыв: {review[1].review}</div>
-                <div>Дата: {review[1].date}</div>
-              </div>
+              <Review review={review[1]} key={review[0]} />
             ))
           }
         </div>

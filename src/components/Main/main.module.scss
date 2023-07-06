@@ -1,8 +1,15 @@
 .main {
-  padding: 0 30px;
+  padding: 15px 30px;
+}
+
+.reviewList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .pagination {
+  margin-top: 20px;
 
   .button {
     width: 30px;

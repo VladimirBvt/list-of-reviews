@@ -2,7 +2,7 @@ import React, {ChangeEvent, Component} from 'react';
 import styles from './header.module.scss'
 import logo from '../../assets/images/logo-reviews.png'
 import Watch from '../Watch/Watch';
-import {IAppState, Language} from '../../app/App';
+import {IAppState} from '../../app/App';
 
 interface IHeaderProps {
   setLanguage: (lang: IAppState) => void;
@@ -20,6 +20,7 @@ class Header extends Component<Props> {
   render() {
     return (
       <div className={styles.header}>
+
         <div className={styles.headerLeft}>
           <div className={styles.logo}>
             <img src={logo} alt="logo"/>
@@ -32,7 +33,9 @@ class Header extends Component<Props> {
             <option value="ru">ru</option>
             <option value="en">en</option>
           </select>
+
           <Watch />
+
         </div>
       </div>
     );
