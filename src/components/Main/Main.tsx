@@ -1,37 +1,30 @@
 import React, {Component} from 'react';
 import styles from './main.module.scss'
-import reviews from '../../data.json'
-import reviewsData from '../../data.json';
 import Review from '../Review/Review';
 import {getTotalPageCount, ROWS_PER_PAGE} from './utils';
+import store, {RootState} from '../../store/store';
+import {connect} from 'react-redux'
 
 interface IMainProps {
-  language: string
+  language: string;
+  reviews: Review[] | [];
 }
 
 interface IMainState {
-  reviews: ReviewsData;
   currentPage: number;
-  disableLeft: boolean,
-  disableRight: boolean,
 }
 
 type Props = Readonly<IMainProps>
 type State = Readonly<IMainState>
-type ReviewsData = typeof reviewsData
-
-
-
 
 class Main extends Component<Props, State> {
+
   private readonly handleNextPageClick = () => {
     const currentPage = this.state.currentPage
-    const nextPage = currentPage + 1
-    const rowCount = this.props.language === 'ru' ?
-      Object.entries(this.state.reviews.ru).length :
-      Object.entries(this.state.reviews.en).length
+    const nextPageNum = currentPage + 1
+    const rowCount = store.getState().review.reviews.length
     const totalPages = getTotalPageCount(rowCount)
-    this.setState({...this.state, currentPage: nextPage <= totalPages ? nextPage : currentPage})
+    this.setState({...this.state, currentPage: nextPageNum <= totalPages ? nextPageNum : currentPage})
   }
 
   private readonly handlePrevPageClick = () => {
@@ -45,28 +38,21 @@ class Main extends Component<Props, State> {
 
     this.state = {
       currentPage: 1,
-      disableLeft: true,
-      disableRight: false,
-      reviews,
     }
   }
 
   render() {
-    const language = this.props.language
-    const reviewsRu = Object.entries(this.state.reviews.ru)
-    const reviewsEn = Object.entries(this.state.reviews.en)
-    const maxRows = language === 'ru' ? reviewsRu.length : reviewsEn.length
+    const {review} = store.getState()
+    const reviews = review.reviews
+    const maxRows = reviews.length
     const maxRow = this.state.currentPage * ROWS_PER_PAGE
     const minRow = maxRow - ROWS_PER_PAGE
 
     return (
       <div className={styles.main}>
         <div className={styles.reviewList}>
-          {language === 'ru' ?
-            reviewsRu.slice(minRow, maxRow).map((review) => (
-              <Review review={review[1]} key={review[0]} />
-            )) :
-            reviewsEn.slice(minRow, maxRow).map(review => (
+          {
+            reviews.slice(minRow, maxRow).map(review => (
               <Review review={review[1]} key={review[0]} />
             ))
           }
@@ -92,4 +78,8 @@ class Main extends Component<Props, State> {
   }
 }
 
-export default Main;
+const mapStateToProps = (state: RootState) => ({
+  language: state.language.language
+})
+
+export default connect(mapStateToProps, {reviews: []})(Main);

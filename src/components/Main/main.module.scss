@@ -21,6 +21,11 @@
     &:active {
       background: #a4820d;
     }
+
+    &:disabled {
+      background: #eab912;
+      cursor: initial;
+    }
   }
 
   .currentPage {
