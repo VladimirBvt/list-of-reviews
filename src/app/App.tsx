@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import Header from '../components/Header/Header';
-import Main from '../components/Main/Main';
+import HeaderWithoutRedux from '../components/Header/HeaderWithoutRedux';
+import MainWithoutRedux from '../components/Main/MainWithoutRedux';
+import MainRedux from '../components/Main/MainRedux';
+import HeaderRedux from '../components/Header/HeaderRedux';
 
 interface IAppProps {}
 
@@ -25,8 +27,10 @@ class App extends Component<Props, State> {
   render() {
     return (
       <div>
-        <Header setLanguage={this.setState.bind(this)} language={this.state.language} />
-        <Main language={this.state.language} />
+        {/*<HeaderWithoutRedux setLanguage={this.setState.bind(this)} language={this.state.language} />*/}
+        <HeaderRedux />
+        {/*<MainWithoutRedux language={this.state.language} />*/}
+        <MainRedux />
       </div>
     );
   }

@@ -1,20 +1,15 @@
 import React, {ChangeEvent, Component} from 'react';
-import styles from './header.module.scss'
-import logo from '../../assets/images/logo-reviews.png'
+import styles from './header.module.scss';
+import logo from '../../assets/images/logo-reviews.png';
 import Watch from '../Watch/Watch';
-import {IAppState} from '../../app/App';
+import store from '../../store/store';
+import {changeLanguage} from '../../store/slices/languageSlice';
 
-interface IHeaderProps {
-  setLanguage: (lang: IAppState) => void;
-  language: string;
-}
 
-type Props = Readonly<IHeaderProps>
-
-class Header extends Component<Props> {
+class HeaderRedux extends Component {
 
   handleLanguageChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    this.props.setLanguage({language: event.target.value})
+    store.dispatch(changeLanguage(event.target.value))
   }
 
   render() {
@@ -42,4 +37,4 @@ class Header extends Component<Props> {
   }
 }
 
-export default Header;
+export default HeaderRedux;

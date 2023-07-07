@@ -12,8 +12,6 @@ interface IMainProps {
 interface IMainState {
   reviews: ReviewsData;
   currentPage: number;
-  // disableLeft: boolean,
-  // disableRight: boolean,
 }
 
 type Props = Readonly<IMainProps>
@@ -23,7 +21,7 @@ type ReviewsData = typeof reviewsData
 
 
 
-class Main extends Component<Props, State> {
+class MainWithoutRedux extends Component<Props, State> {
   private readonly handleNextPageClick = () => {
     const currentPage = this.state.currentPage
     const nextPage = currentPage + 1
@@ -45,8 +43,6 @@ class Main extends Component<Props, State> {
 
     this.state = {
       currentPage: 1,
-      // disableLeft: true,
-      // disableRight: false,
       reviews,
     }
   }
@@ -92,4 +88,4 @@ class Main extends Component<Props, State> {
   }
 }
 
-export default Main;
+export default MainWithoutRedux;

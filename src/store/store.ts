@@ -1,18 +1,18 @@
-import {configureStore} from '@reduxjs/toolkit';
+import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import reviewsReducer from './slices/reviewsSlice';
 import languageReducer from './slices/languageSlice';
-import pagesReducer from './slices/pagesSlice';
 
 
-const store = configureStore({
-  reducer: {
-    language: languageReducer,
-    page: pagesReducer,
-    review: reviewsReducer,
-  },
+const reducer = combineReducers({
+  language: languageReducer,
+  review: reviewsReducer,
 })
 
-export type RootState = ReturnType<typeof store.getState>
+const store = configureStore({
+  reducer,
+})
+
+export type RootState = ReturnType<typeof reducer>
 export type AppDispatch = typeof store.dispatch
 
 
