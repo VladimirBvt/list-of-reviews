@@ -1,35 +1,13 @@
 import React, {Component} from 'react';
-import HeaderWithoutRedux from '../components/Header/HeaderWithoutRedux';
-import MainWithoutRedux from '../components/Main/MainWithoutRedux';
-import MainRedux from '../components/Main/MainRedux';
-import HeaderRedux from '../components/Header/HeaderRedux';
-
-interface IAppProps {}
-
-export interface IAppState {
-  language: string
-}
-
-type Props = Readonly<IAppProps>
-type State = Readonly<IAppState>
+import MainRedux from '../components/Main/Main';
+import Header from '../components/Header/Header';
 
 
-class App extends Component<Props, State> {
-
-  constructor(props: Props) {
-    super(props)
-
-    this.state = {
-      language: 'ru',
-    }
-  }
-
+class App extends Component {
   render() {
     return (
       <div>
-        {/*<HeaderWithoutRedux setLanguage={this.setState.bind(this)} language={this.state.language} />*/}
-        <HeaderRedux />
-        {/*<MainWithoutRedux language={this.state.language} />*/}
+        <Header />
         <MainRedux />
       </div>
     );

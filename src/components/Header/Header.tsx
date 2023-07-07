@@ -1,12 +1,13 @@
 import React, {ChangeEvent, Component} from 'react';
 import styles from './header.module.scss';
 import logo from '../../assets/images/logo-reviews.png';
+import titleImage from '../../assets/images/harley-davidson-logo.png';
 import Watch from '../Watch/Watch';
 import store from '../../store/store';
 import {changeLanguage} from '../../store/slices/languageSlice';
 
 
-class HeaderRedux extends Component {
+class Header extends Component {
 
   handleLanguageChange = (event: ChangeEvent<HTMLSelectElement>) => {
     store.dispatch(changeLanguage(event.target.value))
@@ -20,7 +21,9 @@ class HeaderRedux extends Component {
           <div className={styles.logo}>
             <img src={logo} alt="logo"/>
           </div>
-          <h1 className={styles.title}>Отзыв.ру</h1>
+          <h1>
+            <img src={titleImage} alt="title" className={styles.titleImage}/>
+          </h1>
         </div>
 
         <div className={styles.headerRight}>
@@ -37,4 +40,4 @@ class HeaderRedux extends Component {
   }
 }
 
-export default HeaderRedux;
+export default Header;
