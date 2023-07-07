@@ -21,10 +21,12 @@ class Review extends Component<Props> {
 
   render() {
     const {name, review, date} = this.props.review
+    const [lastName, firstName, surname] = name.split(' ')
+    console.log(lastName + ' ' + firstName[0] + '.')
 
     return (
       <div className={styles.review}>
-        <div><span className={styles.title}>Имя клиента:</span> {name}</div>
+        <div><span className={styles.title}>Имя клиента:</span> {`${lastName} ${firstName[0]}.`}</div>
         <div><span className={styles.title}>Отзыв:</span> {review}</div>
         <div><span className={styles.title}>Дата:</span> {date}</div>
       </div>
