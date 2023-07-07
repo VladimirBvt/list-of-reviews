@@ -12,8 +12,8 @@ interface IMainProps {
 interface IMainState {
   reviews: ReviewsData;
   currentPage: number;
-  disableLeft: boolean,
-  disableRight: boolean,
+  // disableLeft: boolean,
+  // disableRight: boolean,
 }
 
 type Props = Readonly<IMainProps>
@@ -45,8 +45,8 @@ class Main extends Component<Props, State> {
 
     this.state = {
       currentPage: 1,
-      disableLeft: true,
-      disableRight: false,
+      // disableLeft: true,
+      // disableRight: false,
       reviews,
     }
   }
